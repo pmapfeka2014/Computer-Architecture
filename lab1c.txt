@@ -1,0 +1,24 @@
+.global _start
+_start:
+
+MOV R2,#5  @ r2=5
+
+SUB R3,R2,#1    @ r3=r2-1
+
+Loop:
+
+
+CMP R2,#1     @ is R2==1?
+BEQ Exit       @ If r2 ==1 go to exit
+MUL R0,R2,R3
+SUB R3,R2,#1
+
+B Loop
+
+
+Exit:
+
+MOV R7, #1
+SWI 0
+
+

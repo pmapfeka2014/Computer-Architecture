@@ -1,0 +1,31 @@
+.global _start
+_start:
+
+MOV R4,#0
+
+
+Loop:
+
+CMP R4,#10
+BEQ Exit
+ _write:
+	MOV R0, #1					@ Output is monitor
+	LDR R1, =string			    @ The address of the string.
+	MOV R2, #8					@ The number of chars to be printed
+	MOV R7, #4					@ System Call #4 Write
+	SWI 0
+
+ADD R4,R4,#1
+
+B Loop
+
+
+Exit:
+MOV R7, #1
+SWI 0
+
+.data					@ Tells the assembler this is not code section
+string:				    @ Name that we give to our string.
+	.ascii "Hello World\n"
+
+

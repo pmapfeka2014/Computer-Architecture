@@ -1,0 +1,51 @@
+ .global _start
+_start:
+
+MOV R4,#2 
+
+CMP R4, #1   
+  BNE Case2  
+   _write:
+	
+	LDR R1, =string			    @ The address of the string.
+	
+	B Exit
+	
+	
+Case2:
+CMP R4, #2   
+  BNE Case3  
+   _write:
+	
+	LDR R1, =string2			    @ The address of the string.
+	
+	B Exit
+	
+Case3:
+CMP R4, #3   
+  BNE Exit 
+   _write:
+	
+	LDR R1, =string3			    @ The address of the string.
+		B Exit
+  
+  
+Exit:
+MOV R0, #1					@ Output is monitor
+MOV R2, #8					@ The number of chars to be printed
+MOV R7, #4					@ System Call #4 Write
+SWI 0
+	
+	
+MOV R7, #1
+SWI 0
+
+
+.data					@ Tells the assembler this is not code section
+string:				    @ Name that we give to our string.
+	.ascii "Option1\n"
+string2: .ascii "Option2\n"
+string3: .ascii "Option3\n"
+
+
+  
